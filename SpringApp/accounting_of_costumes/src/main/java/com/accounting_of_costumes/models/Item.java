@@ -25,10 +25,10 @@ public class Item {
     @Id @GeneratedValue
     private int id;
     
-    @Column(name="item_name",nullable=false,length=200)
+    @Column(name="item_name", nullable=false, length=200)
     private String name;
     
-    @Column(name="items_count",nullable=false)
+    @Column(name="items_count", nullable=false)
     private int count=1;
 
     @Column(name="items_article", nullable=true)
@@ -46,5 +46,13 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "items_state_fk", nullable = false)
     private ItemState state;
+
+    @ManyToMany
+    @JoinTable(
+        name="item_operation",
+        joinColumns=@JoinColumn(name="id"),
+        inverseJoinColumns = @JoinColumn(name="id")
+    )
+    private Set<Operation> operations;
 
 }
