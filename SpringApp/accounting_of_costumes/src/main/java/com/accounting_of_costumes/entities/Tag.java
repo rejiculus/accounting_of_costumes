@@ -15,7 +15,7 @@ import lombok.ToString;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "items")
 public class Tag {
     @Id
     @Column(name="tag_name",nullable=false,length=100)

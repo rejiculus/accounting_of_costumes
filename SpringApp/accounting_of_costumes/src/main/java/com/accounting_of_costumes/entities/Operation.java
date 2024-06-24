@@ -21,7 +21,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@ToString()
+@ToString(exclude = {"person","type","items"})
 public class Operation {
     @Id
     @GeneratedValue
