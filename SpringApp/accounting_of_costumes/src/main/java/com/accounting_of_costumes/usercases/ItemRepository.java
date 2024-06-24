@@ -15,10 +15,6 @@ public interface ItemRepository {
     List<Item> findByName(String name);
     //todo find by article
     //todo find by id
-    //
-
-
-
 
     //D delete
     void delete(Item item);
