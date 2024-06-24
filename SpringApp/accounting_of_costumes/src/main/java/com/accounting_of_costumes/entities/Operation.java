@@ -1,16 +1,14 @@
-package com.accounting_of_costumes.models;
+package com.accounting_of_costumes.entities;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
-
-import org.hibernate.annotations.ManyToAny;
-import org.springframework.format.annotation.DateTimeFormat;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -40,6 +38,6 @@ public class Operation {
     @JoinColumn(name="operation_type_fk", nullable=false)
     private OperationType type;
     
-    @ManyToMany(managedBy="operations")
+    @ManyToMany(mappedBy="operations")
     private Set<Item> items;
 }

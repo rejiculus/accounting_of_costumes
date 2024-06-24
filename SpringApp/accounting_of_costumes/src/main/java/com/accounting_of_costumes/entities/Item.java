@@ -1,4 +1,4 @@
-package com.accounting_of_costumes.models;
+package com.accounting_of_costumes.entities;
 
 import java.util.Set;
 

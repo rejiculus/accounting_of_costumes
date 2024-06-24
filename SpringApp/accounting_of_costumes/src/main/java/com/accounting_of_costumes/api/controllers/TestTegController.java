@@ -1,4 +1,4 @@
-package com.accounting_of_costumes.controllers;
+package com.accounting_of_costumes.api.controllers;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.accounting_of_costumes.models.Tag;
-import com.accounting_of_costumes.services.TagService;
+import com.accounting_of_costumes.entities.Tag;
+import com.accounting_of_costumes.api.services.TagService;
 
 @RestController
 @RequestMapping("/test")
