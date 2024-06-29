@@ -1,4 +1,4 @@
-package com.accounting_of_costumes.entities;
+package com.accounting_of_costumes.api.config.db.schema;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = "item")
-public class Image {
+public class ImageSchema {
     @Id
     @GeneratedValue
     private Long id;
@@ -21,6 +21,6 @@ public class Image {
 
     @ManyToOne
     @JoinColumn(name = "item_fk", nullable = false)
-    private Item item;
+    private ItemSchema item;
 
 }

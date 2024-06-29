@@ -1,4 +1,4 @@
-package com.accounting_of_costumes.entities;
+package com.accounting_of_costumes.api.config.db.schema;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -22,7 +22,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @ToString(exclude = {"person","type","items"})
-public class Operation {
+public class OperationSchema {
     @Id
     @GeneratedValue
     private Long id;
@@ -32,12 +32,12 @@ public class Operation {
     
     @ManyToOne
     @JoinColumn(name="person_fk",nullable=false)
-    private Person person;
+    private PersonSchema person;
 
     @ManyToOne
     @JoinColumn(name="operation_type_fk", nullable=false)
-    private OperationType type;
+    private OperationTypeSchema type;
     
     @ManyToMany(mappedBy="operations")
-    private Set<Item> items;
+    private Set<ItemSchema> items;
 }

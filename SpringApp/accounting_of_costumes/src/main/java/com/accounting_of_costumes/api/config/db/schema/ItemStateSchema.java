@@ -1,8 +1,7 @@
-package com.accounting_of_costumes.entities;
+package com.accounting_of_costumes.api.config.db.schema;
 
 import java.util.Set;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -18,12 +17,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = "items")
-public class ItemState {
+public class ItemStateSchema {
 
     @Id
-    @Column(name="state_name",nullable=false)
+    //@Column(name="state_name",nullable=false)
     private String name;
 
     @OneToMany(mappedBy = "state")
-    private Set<Item> items;
+    private Set<ItemSchema> items;
 }

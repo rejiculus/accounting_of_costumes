@@ -1,4 +1,4 @@
-package com.accounting_of_costumes.entities;
+package com.accounting_of_costumes.api.config.db.schema;
 
 import java.util.Set;
 
@@ -18,12 +18,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @ToString(exclude = "operations")
-public class OperationType {
+public class OperationTypeSchema {
 
     @Id
     @Column(name="type_name",nullable = false,length=20)
     private String typeName;
 
     @OneToMany(mappedBy="type")
-    private Set<Operation> operations;
+    private Set<OperationSchema> operations;
 }

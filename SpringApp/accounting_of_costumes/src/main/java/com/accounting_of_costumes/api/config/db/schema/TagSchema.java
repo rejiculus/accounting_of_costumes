@@ -1,4 +1,4 @@
-package com.accounting_of_costumes.entities;
+package com.accounting_of_costumes.api.config.db.schema;
 
 import java.util.Set;
 
@@ -16,12 +16,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "items")
-public class Tag {
+public class TagSchema {
     @Id
     @Column(name="tag_name",nullable=false,length=100)
     private String name;
 
     @ManyToMany(mappedBy = "tags")
-    private Set<Item> items;
+    private Set<ItemSchema> items;
 
 }

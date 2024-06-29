@@ -1,4 +1,4 @@
-package com.accounting_of_costumes.entities;
+package com.accounting_of_costumes.api.config.db.schema;
 
 import java.util.Set;
 
@@ -13,10 +13,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = {"tags", "operations","state","images"})
-public class Item {
+public class ItemSchema {
 
     @Id @GeneratedValue
-    private int id;
+    private Long id;
     
     @Column(name="item_name", nullable=false, length=200)
     private String name;
@@ -29,11 +29,11 @@ public class Item {
 
     /*-----*/
     @OneToMany(mappedBy = "item")
-    private Set<Image> images;
+    private Set<ImageSchema> images;
 
     @ManyToOne
     @JoinColumn(name = "items_state_fk", nullable = false)
-    private ItemState state;
+    private ItemStateSchema state;
 
     @ManyToMany
     @JoinTable(
@@ -41,7 +41,7 @@ public class Item {
             joinColumns=@JoinColumn(name="id"),
             inverseJoinColumns = @JoinColumn(name="tag_name")
     )
-    private Set<Tag> tags;
+    private Set<TagSchema> tags;
 
     @ManyToMany
     @JoinTable(
@@ -49,6 +49,6 @@ public class Item {
         joinColumns=@JoinColumn(name="id"),
         inverseJoinColumns = @JoinColumn(name="id")
     )
-    private Set<Operation> operations;
+    private Set<OperationSchema> operations;
 
 }

@@ -1,4 +1,4 @@
-package com.accounting_of_costumes.entities;
+package com.accounting_of_costumes.api.config.db.schema;
 
 import java.util.Set;
 
@@ -17,7 +17,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = "operations")
-public class Person {
+public class PersonSchema {
 
     @Id
     @GeneratedValue
@@ -36,5 +36,5 @@ public class Person {
     private String user_comment;
 
     @OneToMany(mappedBy = "person")
-    private Set<Operation> operations;
+    private Set<OperationSchema> operations;
 }
