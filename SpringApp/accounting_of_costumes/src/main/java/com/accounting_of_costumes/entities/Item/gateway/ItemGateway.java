@@ -1,22 +1,21 @@
 package com.accounting_of_costumes.entities.Item.gateway;
 
-import com.accounting_of_costumes.api.config.db.schema.ItemSchema;
+
+
+import com.accounting_of_costumes.api.config.db.schema.TagSchema;
+import com.accounting_of_costumes.entities.Item.model.Item;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ItemGateway {
-    //U update
-    //C create
-    ItemSchema save(ItemSchema itemSchema);
+    Item create(Item item);
+    Item update(Item item);
+    void delete(Item item);
 
-    //R read
-    List<ItemSchema> findAll();
-    List<ItemSchema> findByName(String name);
-    //todo find by article
-    //todo find by id
+    Optional<Item> findById(Long id);
+    List<Item> findByName(String name);
+    List<Item> findByArticle(String article);
 
-    //D delete
-    void delete(ItemSchema itemSchema);
-
-
+    List<Item> findAll();
 }
