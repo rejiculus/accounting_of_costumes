@@ -5,7 +5,7 @@ import com.accounting_of_costumes.entities.Location.model.Location;
 import java.util.List;
 import java.util.Optional;
 
-public interface ILocationGateway {
+public interface LocationGateway {
     Location create(Location location);
     Location update(Location location);
     void delete(Location location);

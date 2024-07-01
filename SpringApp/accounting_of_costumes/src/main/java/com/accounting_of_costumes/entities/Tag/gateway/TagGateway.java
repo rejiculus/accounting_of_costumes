@@ -6,7 +6,7 @@ import com.accounting_of_costumes.entities.Tag.model.Tag;
 import java.util.List;
 import java.util.Optional;
 
-public interface ITagGateway {
+public interface TagGateway {
     Tag create(Tag tag);
     Tag update(Tag tag);
     void delete(Tag tag);
