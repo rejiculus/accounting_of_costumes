@@ -1,17 +1,13 @@
 package com.accounting_of_costumes.entities.Image.model;
 
-import com.accounting_of_costumes.entities.Item.model.Item;
-
 import java.util.Objects;
 
 public class Image {
     private Long id;
     private String source;
-    private Item item;
 
-    public Image(String source, Item item) {
+    public  Image(String source) {
         this.source = source;
-        this.item = item;
     }
 
     public Long getId() {
@@ -28,14 +24,6 @@ public class Image {
 
     public void setSource(String source) {
         this.source = source;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
     }
 
     @Override
@@ -56,7 +44,6 @@ public class Image {
         return "Image{" +
                 "id=" + id +
                 ", source='" + source + '\'' +
-                ", item=" + item.getId() +
                 '}';
     }
 }
