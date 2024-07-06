@@ -24,7 +24,7 @@ public class CreateImageUserCase {
         Item item = this.itemGateway.findById(data.item().id())
                 .orElseThrow(() -> new ItemNotFoundException(data.item().id()));
 
-        Image image = new Image(data.source(),item);
+        Image image = new Image(data.source());
 
         return this.imageGateway.create(image);
 
