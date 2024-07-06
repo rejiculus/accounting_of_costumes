@@ -2,10 +2,8 @@ package com.accounting_of_costumes.api.config.db.schema;
 
 import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.accounting_of_costumes.entities.ItemState.model.ItemState;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,9 +18,13 @@ import lombok.ToString;
 public class ItemStateSchema {
 
     @Id
-    //@Column(name="state_name",nullable=false)
+    @Column(name="state_name",nullable=false)
     private String name;
 
     @OneToMany(mappedBy = "state")
     private Set<ItemSchema> items;
+
+    public ItemState toItemState(){
+        return new ItemState(this.name);
+    }
 }

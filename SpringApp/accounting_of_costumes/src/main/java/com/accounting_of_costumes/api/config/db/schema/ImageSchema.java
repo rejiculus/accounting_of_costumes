@@ -1,5 +1,6 @@
 package com.accounting_of_costumes.api.config.db.schema;
 
+import com.accounting_of_costumes.entities.Image.model.Image;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,4 +24,9 @@ public class ImageSchema {
     @JoinColumn(name = "item_fk", nullable = false)
     private ItemSchema item;
 
+    public Image toImage(){
+        Image image = new Image(this.source);
+        image.setId(this.id);
+        return image;
+    }
 }

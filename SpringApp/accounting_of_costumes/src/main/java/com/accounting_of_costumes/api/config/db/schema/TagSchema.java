@@ -2,16 +2,15 @@ package com.accounting_of_costumes.api.config.db.schema;
 
 import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import com.accounting_of_costumes.entities.Tag.model.Tag;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
+@Table(name = "tag")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,5 +22,9 @@ public class TagSchema {
 
     @ManyToMany(mappedBy = "tags")
     private Set<ItemSchema> items;
+
+    public Tag toTag(){
+        return new Tag(this.name);
+    }
 
 }

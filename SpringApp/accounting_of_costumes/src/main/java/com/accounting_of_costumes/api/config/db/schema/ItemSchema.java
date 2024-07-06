@@ -1,7 +1,10 @@
 package com.accounting_of_costumes.api.config.db.schema;
 
+import java.time.LocalDate;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import com.accounting_of_costumes.entities.Item.model.Item;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,10 +12,11 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
+@Table(name = "item")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"tags", "operations","state","images"})
+@ToString(exclude = {"tags", "state", "images"})
 public class ItemSchema {
 
     @Id @GeneratedValue
@@ -28,12 +32,21 @@ public class ItemSchema {
     private String article;
 
     /*-----*/
-    @OneToMany(mappedBy = "item")
-    private Set<ImageSchema> images;
+    private LocalDate registrationDate;
+    private LocalDate writeOffDate;
+
+
+    /*-----*/
+    @ManyToOne
+    @JoinColumn(name = "location_fk", nullable = false)
+    private LocationSchema location;
 
     @ManyToOne
     @JoinColumn(name = "items_state_fk", nullable = false)
     private ItemStateSchema state;
+
+    @OneToMany(mappedBy = "item")
+    private Set<ImageSchema> images;
 
     @ManyToMany
     @JoinTable(
@@ -43,12 +56,22 @@ public class ItemSchema {
     )
     private Set<TagSchema> tags;
 
-    @ManyToMany
-    @JoinTable(
-        name="item_operation",
-        joinColumns=@JoinColumn(name="id"),
-        inverseJoinColumns = @JoinColumn(name="id")
-    )
-    private Set<OperationSchema> operations;
 
+
+    public Item toItem(){
+        Item item = new Item(this.name,this.state.toItemState());
+        item.setCount(this.count);
+        item.setArticle(this.article);
+        item.setRegistrationDate(this.registrationDate);
+        item.setWriteOffDate(this.writeOffDate);
+        item.setLocation(this.location.toLocation());
+        item.setImages(this.images.stream()
+                .map(ImageSchema::toImage)
+                .collect(Collectors.toSet()));
+        item.setTags(this.tags.stream()
+                .map(TagSchema::toTag)
+                .collect(Collectors.toSet()));
+
+        return item;
+    }
 }

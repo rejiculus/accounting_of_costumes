@@ -7,8 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.accounting_of_costumes.api.config.db.schema.ItemSchema;
 
-public interface ItemRepository extends JpaRepository<ItemSchema, Integer> {
-    List<ItemSchema> findByName(String name);
-
-
+public interface ItemRepository extends JpaRepository<ItemSchema, Long> {
 }
