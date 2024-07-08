@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 public class Tag {
     private String name;
+    private Set<Item> items;
 
     public Tag(String name){
         this.name = name;
@@ -27,6 +28,20 @@ public class Tag {
         this.name = name;
     }
 
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public void addItem(Item item){
+        if(this.items.add(item)) {
+            item.addTag(this);
+        }
+    }
+    public void deleteItem(Item item){
+        if(this.items.remove(item)){
+            item.deleteTag(this);
+        }
+    }
 
     @Override
     public final boolean equals(Object o) {

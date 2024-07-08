@@ -1,15 +1,21 @@
 package com.accounting_of_costumes.entities.Location.model;
 
+import com.accounting_of_costumes.entities.Item.model.Item;
 import com.accounting_of_costumes.entities.Place.model.Place;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class Location {
     private Long id;
     private String route;
     private Place place;
+    private Set<Item> items;
 
     public Location(String route, Place place) {
         this.route = route;
         this.place = place;
+        this.items = new HashSet<>();
     }
 
     public Long getId() {
@@ -33,7 +39,25 @@ public class Location {
     }
 
     public void setPlace(Place place) {
-        this.place = place;
+        if(!this.place.equals(place)){
+            this.place.deleteLocation(this);
+            place.addLocation(this);
+            this.place=place;
+        }
+
+    }
+
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public void addItem(Item item){
+        if(this.items.add(item)){
+            item.setLocation(this);
+        }
+    }
+    public void deleteItem(Item item){
+        this.items.remove(item);
     }
 
     @Override

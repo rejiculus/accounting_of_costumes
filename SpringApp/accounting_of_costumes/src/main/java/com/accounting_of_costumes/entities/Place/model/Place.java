@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class Place {
     private Long id;
     private String name;
+    private Set<Location> locations;
 
     public Place(String name) {
         this.name = name;
@@ -36,6 +37,19 @@ public class Place {
         this.name = name;
     }
 
+    public Set<Location> getLocations() {
+        return locations;
+    }
+
+    public void addLocation(Location location){
+        if(this.locations.add(location)){
+            location.setPlace(this);
+        }
+    }
+
+    public void deleteLocation(Location location){
+        this.locations.remove(location);
+    }
 
     @Override
     public final boolean equals(Object o) {

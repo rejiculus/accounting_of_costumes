@@ -38,15 +38,15 @@ public class Item {
         this.tags = new HashSet<>();
     }
 
-    public Item(Long id, String name, int count, String article, Location location, ItemState itemState, Set<Image> images, Set<Tag> tags) {
+    public Item(Long id, String name, int count, String article, Location location, ItemState itemState) {
         this.id = id;
         this.name = name;
         this.count = count;
         this.article = article;
         this.location = location;
         this.itemState = itemState;
-        this.images = images;
-        this.tags = tags;
+        this.images = new HashSet<>();
+        this.tags = new HashSet<>();
     }
 
 
@@ -114,7 +114,11 @@ public class Item {
     }
 
     public void setLocation(Location location) {
-        this.location = location;
+        if(this.location.equals(location)){
+            this.location.deleteItem(this);
+            location.addItem(this);
+            this.location = location;
+        }
     }
 
     public ItemState getItemState() {
@@ -122,7 +126,11 @@ public class Item {
     }
 
     public void setItemState(ItemState itemState) {
-        this.itemState = itemState;
+        if(this.itemState.equals(itemState)){
+            this.itemState.deleteItem(this);
+            itemState.addItem(this);
+            this.itemState = itemState;
+        }
     }
 
     //images
@@ -130,16 +138,16 @@ public class Item {
         return images;
     }
 
-    public void setImages(Set<Image> images) {
-        this.images = images;
-    }
-
     public void addImage(Image image){
-        this.images.add(image);
+        if(this.images.add(image)){
+            image.setItem(this);
+        }
     }
 
     public void deleteImage(Image image){
-        this.images.remove(image);
+        if(this.images.remove(image)){
+            image.setItem(null);//todo ?
+        }
     }
 
     //tags
@@ -147,16 +155,16 @@ public class Item {
         return tags;
     }
 
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
-    }
-
     public void addTag(Tag tag){
-        this.tags.add(tag);
+        if(this.tags.add(tag)) {
+            tag.addItem(this);
+        }
     }
 
     public void deleteTag(Tag tag){
-        this.tags.remove(tag);
+        if(this.tags.remove(tag)){
+            tag.deleteItem(this);
+        }
     }
 
 
