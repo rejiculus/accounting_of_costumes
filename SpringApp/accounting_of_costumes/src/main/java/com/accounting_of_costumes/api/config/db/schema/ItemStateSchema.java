@@ -24,6 +24,10 @@ public class ItemStateSchema {
     @OneToMany(mappedBy = "state")
     private Set<ItemSchema> items;
 
+    public ItemStateSchema(ItemState itemState){
+        this.name = itemState.getName();
+    }
+
     public ItemState toItemState(){
         return new ItemState(this.name);
     }

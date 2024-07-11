@@ -27,7 +27,10 @@ public class PlaceSchema {
     @OneToMany(mappedBy = "place")
     private Set<LocationSchema> locations;
 
-
+    public PlaceSchema(Place place){
+        this.id = place.getId();
+        this.name = place.getName();
+    }
 
     public Place toPlace(){
         return new Place(this.id, this.name);

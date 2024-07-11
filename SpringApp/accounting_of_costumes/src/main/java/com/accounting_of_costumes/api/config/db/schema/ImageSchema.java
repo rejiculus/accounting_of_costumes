@@ -24,6 +24,12 @@ public class ImageSchema {
     @JoinColumn(name = "item_fk", nullable = false)
     private ItemSchema item;
 
+    public ImageSchema(Image image){
+        this.id = image.getId();
+        this.source = image.getSource();
+        this.item = new ItemSchema(image.getItem());
+    }
+
     public Image toImage(){
         Image image = new Image(this.source);
         image.setId(this.id);

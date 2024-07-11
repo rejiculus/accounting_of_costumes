@@ -56,7 +56,26 @@ public class ItemSchema {
     )
     private Set<TagSchema> tags;
 
+    public ItemSchema(Long id){
+        this.id = id;
+    }
 
+    public ItemSchema(Item item){
+        this.id = item.getId();
+        this.name = item.getName();
+        this.count = item.getCount();
+        this.article = item.getArticle();
+
+        this.registrationDate = item.getRegistrationDate();
+        this.writeOffDate = item.getWriteOffDate();
+
+        this.location = new LocationSchema(item.getLocation());
+        this.state = new ItemStateSchema(item.getItemState());
+
+        this.tags = item.getTags().stream()
+                .map(x->new TagSchema(x.getName()))
+                .collect(Collectors.toSet());
+    }
 
     public Item toItem(){
         Item item = new Item(this.name,this.state.toItemState());
@@ -65,10 +84,10 @@ public class ItemSchema {
         item.setRegistrationDate(this.registrationDate);
         item.setWriteOffDate(this.writeOffDate);
         item.setLocation(this.location.toLocation());
-        item.setImages(this.images.stream()
+        item.addAllImages(this.images.stream()
                 .map(ImageSchema::toImage)
                 .collect(Collectors.toSet()));
-        item.setTags(this.tags.stream()
+        item.addAllTags(this.tags.stream()
                 .map(TagSchema::toTag)
                 .collect(Collectors.toSet()));
 

@@ -31,9 +31,14 @@ public class LocationSchema {
     @OneToMany(mappedBy = "location")
     private Set<ItemSchema> items;
 
+    public LocationSchema(Location location){
+        this.id = location.getId();
+        this.route = location.getRoute();
+        this.place = new PlaceSchema(location.getPlace());
+    }
 
     public Location toLocation(){
-        Location location = new Location(this.route,this.place.toPlace());
+        Location location = new Location(this.route, this.place.toPlace());
         location.setId(this.id);
         return location;
     }
