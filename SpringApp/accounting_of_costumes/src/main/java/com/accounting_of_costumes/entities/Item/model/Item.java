@@ -143,6 +143,11 @@ public class Item {
             image.setItem(this);
         }
     }
+    public void addAllImages(Set<Image> images){
+        for(Image image: images)
+            if(this.images.add(image))
+                image.setItem(this);
+    }
 
     public void deleteImage(Image image){
         if(this.images.remove(image)){
@@ -159,6 +164,11 @@ public class Item {
         if(this.tags.add(tag)) {
             tag.addItem(this);
         }
+    }
+    public void addAllTags(Set<Tag> tags){
+        for(Tag tag: tags)
+            if(this.tags.add(tag))
+                tag.addItem(this);
     }
 
     public void deleteTag(Tag tag){
