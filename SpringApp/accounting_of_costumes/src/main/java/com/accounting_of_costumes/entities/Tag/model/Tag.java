@@ -18,6 +18,7 @@ public class Tag {
 
     public Tag(String name){
         this.name = name;
+        this.items = new HashSet<>();
     }
 
     public String getName() {
