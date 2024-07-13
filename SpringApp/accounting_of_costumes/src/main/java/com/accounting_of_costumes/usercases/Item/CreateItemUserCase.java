@@ -66,8 +66,8 @@ public class CreateItemUserCase {
         item.setRegistrationDate(data.registrationDate());
         item.setWriteOffDate(data.writeOffDate());
         item.setLocation(location);
-        item.setImages(images);
-        item.setTags(tags);
+        item.addAllImages(images);
+        item.addAllTags(tags);
 
         return this.itemGateway.create(item);
     }
