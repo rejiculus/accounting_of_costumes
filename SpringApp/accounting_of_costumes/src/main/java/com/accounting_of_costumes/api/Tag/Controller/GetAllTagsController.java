@@ -18,23 +18,14 @@ public class GetAllTagsController {
         this.userCase = getAllTagsUserCase;
     }
 
-    @GetMapping("/test/tags/")
-    @ResponseStatus(HttpStatus.OK)
-    public List<TagPublicData> getAllTags(){
-        List<Tag> tag = userCase.execute();
-        return tag.stream()
-                .map(TagSchema::new)
-                .map(TagPublicData::new)
-                .toList();
-    }
-    @GetMapping("/test/tag/")
+    @GetMapping("/tag/")
     @ResponseStatus(HttpStatus.OK)
     public String getAllTagsString(){
         List<Tag> tag = userCase.execute();
         return tag.stream()
-                .map(TagSchema::new)
                 .map(TagPublicData::new)
-                .toList().toString();
+                .toList()
+                .toString();
     }
 
 }

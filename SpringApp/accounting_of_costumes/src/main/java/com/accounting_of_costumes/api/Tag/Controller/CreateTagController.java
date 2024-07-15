@@ -16,7 +16,7 @@ public class CreateTagController {
         this.userCase = createTagUserCase;
     }
 
-    @PutMapping("/test/tag/")
+    @PutMapping("/tag/")
     public String createTag(@RequestBody CreateTagData data){
         Tag tag = userCase.execute(data);
         return tag.toString();
