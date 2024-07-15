@@ -7,8 +7,8 @@ import com.accounting_of_costumes.entities.Tag.model.Tag;
 public class DeleteTagUserCase {
     private final TagGateway gateway;
 
-    public DeleteTagUserCase(TagGateway TagGateway){
-        this.gateway = TagGateway;
+    public DeleteTagUserCase(TagGateway tagGateway){
+        this.gateway = tagGateway;
     }
 
     public void execute(String name) {

@@ -5,10 +5,10 @@ import com.accounting_of_costumes.entities.Place.model.Place;
 
 import java.util.List;
 
-public class GetAllPlasesUserCase {
+public class GetAllPlacesUserCase {
     private PlaceGateway gateway;
 
-    public GetAllPlasesUserCase(PlaceGateway placeGateway){
+    public GetAllPlacesUserCase(PlaceGateway placeGateway){
         this.gateway = placeGateway;
     }
 

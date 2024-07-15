@@ -8,8 +8,8 @@ import java.util.List;
 public class GetAllTagsUserCase {
     private final TagGateway gateway;
 
-    public GetAllTagsUserCase(TagGateway TagGateway){
-        this.gateway = TagGateway;
+    public GetAllTagsUserCase(TagGateway tagGateway){
+        this.gateway = tagGateway;
     }
 
     public List<Tag> execute() {

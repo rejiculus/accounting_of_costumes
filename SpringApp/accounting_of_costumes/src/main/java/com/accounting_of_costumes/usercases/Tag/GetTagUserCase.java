@@ -9,8 +9,8 @@ import java.util.List;
 public class GetTagUserCase {
     private final TagGateway gateway;
 
-    public GetTagUserCase(TagGateway TagGateway){
-        this.gateway = TagGateway;
+    public GetTagUserCase(TagGateway tagGateway){
+        this.gateway = tagGateway;
     }
 
     public Tag execute(String name) {

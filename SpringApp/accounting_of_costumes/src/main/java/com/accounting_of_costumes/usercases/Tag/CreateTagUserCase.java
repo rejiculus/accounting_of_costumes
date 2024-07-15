@@ -8,8 +8,8 @@ import com.accounting_of_costumes.usercases.Tag.DTO.IAddTagData;
 public class CreateTagUserCase {
     private final TagGateway gateway;
 
-    public CreateTagUserCase(TagGateway TagGateway){
-        this.gateway = TagGateway;
+    public CreateTagUserCase(TagGateway tagGateway){
+        this.gateway = tagGateway;
     }
 
     public Tag execute(IAddTagData tagData){
