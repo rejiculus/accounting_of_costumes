@@ -12,7 +12,7 @@ public class GetAllPlacesController {
         this.userCase = userCase;
     }
 
-    @GetMapping(name = "/place/")
+    @GetMapping("/places")
     public String GetAllPlaces(){
         return this.userCase.execute().toString();
     }

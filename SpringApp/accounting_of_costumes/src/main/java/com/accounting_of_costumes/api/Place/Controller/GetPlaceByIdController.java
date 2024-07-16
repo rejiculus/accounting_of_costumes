@@ -13,7 +13,7 @@ public class GetPlaceByIdController {
         this.userCase = userCase;
     }
 
-    @GetMapping(name = "/place/{id}")
+    @GetMapping("/place/{id}")
     public String getPlaceById(@PathVariable Long id){
         return this.userCase.execute(id).toString();
     }
