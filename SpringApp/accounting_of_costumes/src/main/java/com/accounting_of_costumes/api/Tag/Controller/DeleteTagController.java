@@ -19,7 +19,7 @@ public class DeleteTagController {
         this.userCase = deleteTagUserCase;
     }
 
-    @DeleteMapping(name = "/tag/{name}")
+    @DeleteMapping("/tag/{name}")
     @ResponseStatus(HttpStatus.OK)
     public String deleteTag(@PathVariable String name) throws TagNotFoundException {
         this.userCase.execute(name);

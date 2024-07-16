@@ -16,7 +16,7 @@ public class GetTagController {
         this.userCase = getTagUserCase;
     }
 
-    @GetMapping(name = "/tag/{name}")
+    @GetMapping("/tag/{name}")
     public String getTag(@PathVariable String name) throws TagNotFoundException {
         Tag tag = userCase.execute(name);
         return new TagPublicData(tag).toString();
