@@ -1,12 +1,18 @@
 package com.accounting_of_costumes.api.config.web;
 
+import com.accounting_of_costumes.api.Location.DTO.GetLocationByPlaceData;
+import com.accounting_of_costumes.api.Location.Gateway.LocationDatabaseGateway;
 import com.accounting_of_costumes.api.Place.Controller.CreatePlaceController;
 import com.accounting_of_costumes.api.Place.Gateway.PlaceDatabaseGateway;
 import com.accounting_of_costumes.api.Tag.Gateway.TagDatabaseGateway;
+import com.accounting_of_costumes.api.config.db.repository.LocationRepository;
 import com.accounting_of_costumes.api.config.db.repository.PlaceRepository;
 import com.accounting_of_costumes.api.config.db.repository.TagRepository;
+import com.accounting_of_costumes.entities.Location.gateway.LocationGateway;
+import com.accounting_of_costumes.entities.Location.model.Location;
 import com.accounting_of_costumes.entities.Place.gateway.PlaceGateway;
 import com.accounting_of_costumes.entities.Tag.gateway.TagGateway;
+import com.accounting_of_costumes.usercases.Location.*;
 import com.accounting_of_costumes.usercases.Place.*;
 import com.accounting_of_costumes.usercases.Tag.CreateTagUserCase;
 import com.accounting_of_costumes.usercases.Tag.DeleteTagUserCase;
@@ -79,4 +85,51 @@ public class MvcConfig {
         PlaceGateway placeGateway = new PlaceDatabaseGateway(placeRepository);
         return new UpdatePlaceUserCase(placeGateway);
     }
+
+    /*      Locations       */
+    @Bean
+    public CreateLocationUserCase createLocationUserCase(LocationRepository locationRepository,PlaceRepository placeRepository){
+        LocationGateway locationGateway = new LocationDatabaseGateway(locationRepository);
+        PlaceGateway placeGateway = new PlaceDatabaseGateway(placeRepository);
+        return new CreateLocationUserCase(locationGateway, placeGateway);
+    }
+
+    @Bean
+    public DeleteLocationUserCase deleteLocationUserCase(LocationRepository locationRepository){
+        LocationGateway locationGateway = new LocationDatabaseGateway(locationRepository);
+        return new DeleteLocationUserCase(locationGateway);
+    }
+
+    @Bean
+    public GetAllLocationsUserCase getAllLocationsUserCase(LocationRepository locationRepository){
+        LocationGateway locationGateway = new LocationDatabaseGateway(locationRepository);
+        return new GetAllLocationsUserCase(locationGateway);
+    }
+
+    @Bean
+    public GetLocationByIdUserCase getLocationByIdUserCase(LocationRepository locationRepository){
+        LocationGateway locationGateway = new LocationDatabaseGateway(locationRepository);
+        return new GetLocationByIdUserCase(locationGateway);
+    }
+
+    @Bean
+    public GetLocationByPlaceUserCase getLocationByPlaceUserCase(LocationRepository locationRepository,PlaceRepository placeRepository){
+        LocationGateway locationGateway = new LocationDatabaseGateway(locationRepository);
+        PlaceGateway placeGateway = new PlaceDatabaseGateway(placeRepository);
+        return new GetLocationByPlaceUserCase(locationGateway, placeGateway);
+    }
+
+    @Bean
+    public GetLocationByRouteUserCase getLocationByRouteUserCase(LocationRepository locationRepository){
+        LocationGateway locationGateway = new LocationDatabaseGateway(locationRepository);
+        return new GetLocationByRouteUserCase(locationGateway);
+    }
+
+    @Bean
+    public UpdateLocationUserCase updateLocationUserCase(LocationRepository locationRepository,PlaceRepository placeRepository){
+        LocationGateway locationGateway = new LocationDatabaseGateway(locationRepository);
+        PlaceGateway placeGateway = new PlaceDatabaseGateway(placeRepository);
+        return new UpdateLocationUserCase(locationGateway, placeGateway);
+    }
+
 }
