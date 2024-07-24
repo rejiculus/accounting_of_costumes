@@ -14,7 +14,7 @@ public class GetLocationByRouteController {
         this.userCase = userCase;
     }
 
-    @GetMapping("/locations/")
+    @GetMapping("/locations/?route")
     public String getLocationByRoute(@RequestParam String route){
         return this.userCase.execute(route).toString();
     }

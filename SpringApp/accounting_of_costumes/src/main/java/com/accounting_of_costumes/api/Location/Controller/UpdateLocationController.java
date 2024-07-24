@@ -16,6 +16,6 @@ public class UpdateLocationController {
     public String updateLocation(@PathVariable Long id, @RequestBody UpdateLocationData data){
         if(id.equals(data.id()))    //todo correct this shit
             return this.userCase.execute(data).toString();
-        return this.userCase.execute(new UpdateLocationData(id, data.route(), data.place())).toString();
+        return this.userCase.execute(new UpdateLocationData(id, data.route(), data.placeId())).toString();
     }
 }
