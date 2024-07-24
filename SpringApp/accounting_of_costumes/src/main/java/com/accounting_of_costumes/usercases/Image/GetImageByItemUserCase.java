@@ -18,9 +18,9 @@ public class GetImageByItemUserCase {
         this.itemGateway = itemGateway;
     }
 
-    public List<Image> execute(IItemPublicData data){
-        Item item = this.itemGateway.findById(data.id())
-                .orElseThrow(() -> new ItemNotFoundException(data.id()));
+    public List<Image> execute(Long itemId){
+        Item item = this.itemGateway.findById(itemId)
+                .orElseThrow(() -> new ItemNotFoundException(itemId));
 
         return this.imageGateway.findByItem(item);
 

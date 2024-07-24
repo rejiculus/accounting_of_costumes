@@ -18,11 +18,11 @@ public class CreateImageUserCase {
     }
 
     public Image execute(ICreateImageData data){
-        if(data.source()==null || data.source().isBlank() || data.item()==null)
+        if(data.source()==null || data.source().isBlank() || data.itemId()==null)
             throw new ParamValueException("Create param cant be null!");
 
-        Item item = this.itemGateway.findById(data.item().id())
-                .orElseThrow(() -> new ItemNotFoundException(data.item().id()));
+        Item item = this.itemGateway.findById(data.itemId())
+                .orElseThrow(() -> new ItemNotFoundException(data.itemId()));
 
         Image image = new Image(data.source());
 

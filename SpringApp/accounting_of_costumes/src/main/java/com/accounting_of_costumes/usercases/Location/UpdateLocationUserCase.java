@@ -20,7 +20,7 @@ public class UpdateLocationUserCase {
     }
 
     public Location execute(IUpdateLocationData data){
-        if(data.route()==null || data.route().isBlank() || data.place()==null)
+        if(data.route()==null || data.route().isBlank() || data.placeId()==null)
             throw new ParamValueException("Create Location data cant be null!");
 
         Location location = this.locationGateway
@@ -28,8 +28,8 @@ public class UpdateLocationUserCase {
                 .orElseThrow(() -> new LocationNotFoundException(data.id()));
 
         Place place = placeGateway
-                .findById(data.place().id())
-                .orElseThrow(() -> new PlaceNotFoundException(data.place().id()));
+                .findById(data.placeId())
+                .orElseThrow(() -> new PlaceNotFoundException(data.placeId()));
 
         location.setRoute(data.route());
         location.setPlace(place);

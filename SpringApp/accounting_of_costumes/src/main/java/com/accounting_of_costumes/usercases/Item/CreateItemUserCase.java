@@ -13,9 +13,7 @@ import com.accounting_of_costumes.entities.Location.model.Location;
 import com.accounting_of_costumes.entities.Tag.exception.TagNotFoundException;
 import com.accounting_of_costumes.entities.Tag.gateway.TagGateway;
 import com.accounting_of_costumes.entities.Tag.model.Tag;
-import com.accounting_of_costumes.usercases.Image.DTO.IImagePublicData;
 import com.accounting_of_costumes.usercases.Item.DTO.ICreateItemData;
-import com.accounting_of_costumes.usercases.Tag.DTO.ITagPublicData;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -40,21 +38,19 @@ public class CreateItemUserCase {
     }
 
     public Item execute(ICreateItemData data){
-        ItemState state = this.itemStateGateway.findByName(data.itemState().name())
-                .orElseThrow(() -> new ItemStateNotFoundException(data.itemState().name()));
+        ItemState state = this.itemStateGateway.findByName(data.itemStateName())
+                .orElseThrow(() -> new ItemStateNotFoundException(data.itemStateName()));
         Location location = this.locationGateway
-                                    .findById(data.location().id())
+                                    .findById(data.locationId())
                                     .orElse(null);
 
-        Set<Image> images = data.images().stream()
-                .map(IImagePublicData::id)
+        Set<Image> images = data.imageIds().stream()
                 .map(x -> this.imageGateway
                         .findById(x)
                         .orElseThrow(() -> new ImageNotFoundException(x)))
                 .collect(Collectors.toSet());
 
-        Set<Tag> tags = data.tags().stream()
-                .map(ITagPublicData::name)
+        Set<Tag> tags = data.tagNames().stream()
                 .map(x -> this.tagGateway
                         .findByName(x)
                         .orElseThrow(() -> new TagNotFoundException(x)))

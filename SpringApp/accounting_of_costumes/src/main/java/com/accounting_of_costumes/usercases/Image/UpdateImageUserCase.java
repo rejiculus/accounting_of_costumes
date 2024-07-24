@@ -24,8 +24,8 @@ public class UpdateImageUserCase {
         Image image = this.imageGateway.findById(data.id())
                 .orElseThrow(() -> new ImageNotFoundException(data.id()));
 
-        Item item = this.itemGateway.findById(data.item().id())
-                .orElseThrow(()-> new ItemNotFoundException(data.item().id()));
+        Item item = this.itemGateway.findById(data.itemId())
+                .orElseThrow(()-> new ItemNotFoundException(data.itemId()));
 
         image.setItem(item);
         image.setSource(data.source());
