@@ -32,7 +32,9 @@ public class ItemSchema {
     private String article;
 
     /*-----*/
+    @Column(name = "registration_date")
     private LocalDate registrationDate;
+    @Column(name = "write_off_date")
     private LocalDate writeOffDate;
 
 

@@ -2,7 +2,6 @@ package com.accounting_of_costumes.entities.Item.gateway;
 
 
 
-import com.accounting_of_costumes.api.config.db.schema.TagSchema;
 import com.accounting_of_costumes.entities.Item.model.Item;
 import com.accounting_of_costumes.entities.Location.model.Location;
 
@@ -21,8 +20,8 @@ public interface ItemGateway {
     Optional<Item> findByLocation(Location location);
     List<Item> findByRegistrationDate(LocalDate registrationDate);
     List<Item> findByWriteOffDate(LocalDate writeOffDate);
-    List<Item> findBetweenRegistrationDate(LocalDate startDate, LocalDate endDate);
-    List<Item> findBetweenWriteOffDate(LocalDate startDate, LocalDate endDate);
+    List<Item> findRegistrationDateBetween(LocalDate startDate, LocalDate endDate);
+    List<Item> findWriteOffDateBetween(LocalDate startDate, LocalDate endDate);
 
     List<Item> findAll();
 }

@@ -17,6 +17,6 @@ public class GetItemByWriteOffDateBetweenUserCase {
     public List<Item> execute(IGetItemBetweenDatesData data){
         if(data.start().isAfter(data.end()))
             throw new ParamValueException("Violation of cause-and-effect relationship! End date before start date!");
-        return this.itemGateway.findBetweenWriteOffDate(data.start(), data.end());
+        return this.itemGateway.findWriteOffDateBetween(data.start(), data.end());
     }
 }

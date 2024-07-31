@@ -17,6 +17,6 @@ public class GetItemByRegistrationDateBetweenUserCase {
     public List<Item> execute(IGetItemBetweenDatesData data){
         if(data.start().isAfter(data.end()))
             throw new ParamValueException("Violation of cause-and-effect relationship! End date before start date!");
-        return this.itemGateway.findBetweenRegistrationDate(data.start(), data.end());
+        return this.itemGateway.findRegistrationDateBetween(data.start(), data.end());
     }
 }

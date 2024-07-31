@@ -16,6 +16,6 @@ public interface ItemRepository extends JpaRepository<ItemSchema, Long> {
     Optional<ItemSchema> findByLocation(LocationSchema location);
     List<ItemSchema> findByRegistrationDate(LocalDate registrationDate);
     List<ItemSchema> findByWriteOffDate(LocalDate writeOffDate);
-    List<ItemSchema> findBetweenRegistrationDate(LocalDate startDate,LocalDate endDate);
-    List<ItemSchema> findBetweenWriteOffDate(LocalDate startDate,LocalDate endDate);
+    List<ItemSchema> findByRegistrationDateBetween(LocalDate startDate, LocalDate endDate);
+    List<ItemSchema> findByWriteOffDateBetween(LocalDate startDate, LocalDate endDate);
 }
