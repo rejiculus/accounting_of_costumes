@@ -81,16 +81,16 @@ public class ItemDatabaseGateway implements ItemGateway {
     }
 
     @Override
-    public List<Item> findBetweenRegistrationDate(LocalDate startDate, LocalDate endDate) {
-        return this.repository.findBetweenRegistrationDate(startDate,endDate)
+    public List<Item> findRegistrationDateBetween(LocalDate startDate, LocalDate endDate) {
+        return this.repository.findByRegistrationDateBetween(startDate,endDate)
                 .stream()
                 .map(ItemSchema::toItem)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Item> findBetweenWriteOffDate(LocalDate startDate, LocalDate endDate) {
-        return this.repository.findBetweenWriteOffDate(startDate, endDate)
+    public List<Item> findWriteOffDateBetween(LocalDate startDate, LocalDate endDate) {
+        return this.repository.findByWriteOffDateBetween(startDate, endDate)
                 .stream()
                 .map(ItemSchema::toItem)
                 .collect(Collectors.toList());
