@@ -1,7 +1,13 @@
 package com.accounting_of_costumes.entities.Item.model;
 
+import com.accounting_of_costumes.entities.Exception.NoValidIdException;
+import com.accounting_of_costumes.entities.Exception.NoValidNameException;
+import com.accounting_of_costumes.entities.Exception.NullValueParamException;
 import com.accounting_of_costumes.entities.Exception.ParamValueException;
 import com.accounting_of_costumes.entities.Image.model.Image;
+import com.accounting_of_costumes.entities.Item.exception.NoValidArticleException;
+import com.accounting_of_costumes.entities.Item.exception.NoValidCountException;
+import com.accounting_of_costumes.entities.Item.exception.NoValidDateException;
 import com.accounting_of_costumes.entities.ItemState.model.ItemState;
 import com.accounting_of_costumes.entities.Location.model.Location;
 import com.accounting_of_costumes.entities.Tag.model.Tag;
@@ -28,14 +34,17 @@ public class Item {
     private Set<Image> images;
     private Set<Tag> tags;
 
+    {
+        this.images = new HashSet<>();
+        this.tags = new HashSet<>();
+    }
+
     public Item(String name, ItemState itemState) {
         this.name = name;
         this.itemState = itemState;
         this.count = 1;
         this.article = "";
         this.location=null;
-        this.images = new HashSet<>();
-        this.tags = new HashSet<>();
     }
 
     public Item(Long id, String name, int count, String article, Location location, ItemState itemState) {
@@ -45,8 +54,6 @@ public class Item {
         this.article = article;
         this.location = location;
         this.itemState = itemState;
-        this.images = new HashSet<>();
-        this.tags = new HashSet<>();
     }
 
 
@@ -55,11 +62,8 @@ public class Item {
     }
 
     public void setId(Long id) {
-        if(id == null)
-            throw new NullPointerException("Id cant be null!");
-        if(id < 0)
-            throw new ParamValueException("Id cant be less than zero!");
-
+        if(id == null || id < 0)
+            throw new NoValidIdException(id);
         this.id = id;
     }
 
@@ -68,8 +72,8 @@ public class Item {
     }
 
     public void setName(String name) {
-        if(id == null)
-            throw new NullPointerException("Name cant be null!");
+        if(name == null || name.isEmpty())
+            throw new NoValidNameException(name);
 
         this.name = name;
     }
@@ -79,8 +83,8 @@ public class Item {
     }
 
     public void setCount(int count) {
-        if(id <= 0)
-            throw new ParamValueException("Count cant be less or equals zero!");
+        if(count <= 0)
+            throw new NoValidCountException(count);
 
         this.count = count;
     }
@@ -90,6 +94,10 @@ public class Item {
     }
 
     public void setArticle(String article) {
+        if(article==null)
+            throw new NullValueParamException("article");
+        if(article.isEmpty())
+            throw new NoValidArticleException(article);
         this.article = article;
     }
 
@@ -97,11 +105,31 @@ public class Item {
         return location;
     }
 
+    public void setLocation(Location location) {
+        if(location==null)
+            throw new NullValueParamException("location");
+        this.location=location;
+    }
+
+    public ItemState getItemState() {
+        return itemState;
+    }
+
+    public void setItemState(ItemState itemState) {
+        if(itemState == null)
+            throw new NullValueParamException("itemState");
+
+        this.itemState = itemState;
+
+    }
+
     public LocalDate getRegistrationDate() {
         return registrationDate;
     }
 
     public void setRegistrationDate(LocalDate registrationDate) {
+        if(registrationDate == null)
+            throw new NullValueParamException("registrationDate");
         this.registrationDate = registrationDate;
     }
 
@@ -110,27 +138,13 @@ public class Item {
     }
 
     public void setWriteOffDate(LocalDate writeOffDate) {
+        if(writeOffDate == null)
+            throw new NullValueParamException("writeOffDate");
+        if(registrationDate==null)
+            throw new NullValueParamException("registrationDate");
+        if(!writeOffDate.isAfter(registrationDate))
+            throw new NoValidDateException(registrationDate,writeOffDate);
         this.writeOffDate = writeOffDate;
-    }
-
-    public void setLocation(Location location) {
-        if(this.location.equals(location)){
-            this.location.deleteItem(this);
-            location.addItem(this);
-            this.location = location;
-        }
-    }
-
-    public ItemState getItemState() {
-        return itemState;
-    }
-
-    public void setItemState(ItemState itemState) {
-        if(this.itemState.equals(itemState)){
-            this.itemState.deleteItem(this);
-            itemState.addItem(this);
-            this.itemState = itemState;
-        }
     }
 
     //images
@@ -138,21 +152,10 @@ public class Item {
         return images;
     }
 
-    public void addImage(Image image){
-        if(this.images.add(image)){
-            image.setItem(this);
-        }
-    }
-    public void addAllImages(Set<Image> images){
-        for(Image image: images)
-            if(this.images.add(image))
-                image.setItem(this);
-    }
-
-    public void deleteImage(Image image){
-        if(this.images.remove(image)){
-            image.setItem(null);//todo ?
-        }
+    public void setImages(Set<Image> images) {
+        if(images == null)
+            throw new NullValueParamException("images");
+        this.images = images;
     }
 
     //tags
@@ -160,24 +163,11 @@ public class Item {
         return tags;
     }
 
-    public void addTag(Tag tag){
-        if(this.tags.add(tag)) {
-            tag.addItem(this);
-        }
+    public void setTags(Set<Tag> tags) {
+        if(tags == null)
+            throw new NullValueParamException("tags");
+        this.tags = tags;
     }
-    public void addAllTags(Set<Tag> tags){
-        for(Tag tag: tags)
-            if(this.tags.add(tag))
-                tag.addItem(this);
-    }
-
-    public void deleteTag(Tag tag){
-        if(this.tags.remove(tag)){
-            tag.deleteItem(this);
-        }
-    }
-
-
 
     @Override
     public final boolean equals(Object o) {

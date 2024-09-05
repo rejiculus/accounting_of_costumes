@@ -1,5 +1,8 @@
 package com.accounting_of_costumes.entities.Image.model;
 
+import com.accounting_of_costumes.entities.Exception.NoValidIdException;
+import com.accounting_of_costumes.entities.Exception.NullValueParamException;
+import com.accounting_of_costumes.entities.Image.exception.NoValidSourceException;
 import com.accounting_of_costumes.entities.Item.model.Item;
 import com.accounting_of_costumes.entities.ItemState.model.ItemState;
 
@@ -23,6 +26,8 @@ public class Image {
     }
 
     public void setId(Long id) {
+        if(id==null || id<0)
+            throw new NoValidIdException(id);
         this.id = id;
     }
 
@@ -31,6 +36,8 @@ public class Image {
     }
 
     public void setSource(String source) {
+        if(source==null || source.isEmpty())
+            throw new NoValidSourceException();
         this.source = source;
     }
 
@@ -39,6 +46,8 @@ public class Image {
     }
 
     public void setItem(Item item) {
+        if(item==null)
+            throw new NullValueParamException("item");
         this.item = item;
     }
 

@@ -1,15 +1,21 @@
 package com.accounting_of_costumes.entities.Place.model;
 
+import com.accounting_of_costumes.entities.Exception.NoValidNameException;
+import com.accounting_of_costumes.entities.Exception.NullValueParamException;
 import com.accounting_of_costumes.entities.Location.model.Location;
+import com.accounting_of_costumes.entities.Exception.NoValidIdException;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Place {
     private Long id;
     private String name;
     private Set<Location> locations;
+
+    {
+        locations=new HashSet<>();
+    }
 
     public Place(String name) {
         this.name = name;
@@ -20,12 +26,19 @@ public class Place {
         this.id = id;
         this.name = name;
     }
+    public Place(Long id, String name, Set<Location> locations) {
+        this.id = id;
+        this.name = name;
+        this.locations = locations;
+    }
 
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
+        if(id<0)
+            throw new NoValidIdException(id);
         this.id = id;
     }
 
@@ -34,6 +47,8 @@ public class Place {
     }
 
     public void setName(String name) {
+        if(name==null || name.isEmpty())
+            throw new NoValidNameException(name);
         this.name = name;
     }
 
@@ -41,15 +56,12 @@ public class Place {
         return locations;
     }
 
-    public void addLocation(Location location){
-        if(this.locations.add(location)){
-            location.setPlace(this);
-        }
+    public void setLocations(Set<Location> locations) {
+        if(locations==null)
+            throw new NullValueParamException("locations");
+        this.locations = locations;
     }
 
-    public void deleteLocation(Location location){
-        this.locations.remove(location);
-    }
 
     @Override
     public final boolean equals(Object o) {

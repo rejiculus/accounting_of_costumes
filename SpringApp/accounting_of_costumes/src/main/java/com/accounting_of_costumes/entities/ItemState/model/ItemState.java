@@ -1,5 +1,7 @@
 package com.accounting_of_costumes.entities.ItemState.model;
 
+import com.accounting_of_costumes.entities.Exception.NoValidNameException;
+import com.accounting_of_costumes.entities.Exception.NullValueParamException;
 import com.accounting_of_costumes.entities.Item.model.Item;
 
 import java.util.HashSet;
@@ -20,19 +22,19 @@ public class ItemState {
     }
 
     public void setName(String name) {
+        if(name==null || name.isEmpty())
+            throw new NoValidNameException(name);
         this.name = name;
     }
 
     public Set<Item> getItems() {
         return items;
     }
-    public void addItem(Item item){
-        if(this.items.add(item)){
-            item.setItemState(this);
-        }
-    }
-    public void deleteItem(Item item){
-        this.items.remove(item);
+
+    public void setItems(Set<Item> items) {
+        if(items==null)
+            throw new NullValueParamException("items");
+        this.items = items;
     }
 
 

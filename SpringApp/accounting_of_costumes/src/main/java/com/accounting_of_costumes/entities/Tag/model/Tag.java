@@ -1,11 +1,12 @@
 package com.accounting_of_costumes.entities.Tag.model;
 
 
+import com.accounting_of_costumes.entities.Exception.NullValueParamException;
 import com.accounting_of_costumes.entities.Item.model.Item;
+import com.accounting_of_costumes.entities.Exception.NoValidNameException;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /** Tag
  *
@@ -24,8 +25,9 @@ public class Tag {
     public String getName() {
         return name;
     }
-    //todo check set value
     public void setName(String name) {
+        if(name==null || name.isEmpty())
+            throw new NoValidNameException(name);
         this.name = name;
     }
 
@@ -33,15 +35,10 @@ public class Tag {
         return items;
     }
 
-    public void addItem(Item item){
-        if(this.items.add(item)) {
-            item.addTag(this);
-        }
-    }
-    public void deleteItem(Item item){
-        if(this.items.remove(item)){
-            item.deleteTag(this);
-        }
+    public void setItems(Set<Item> items) {
+        if(items == null)
+            throw new NullValueParamException("items");
+        this.items = items;
     }
 
     @Override

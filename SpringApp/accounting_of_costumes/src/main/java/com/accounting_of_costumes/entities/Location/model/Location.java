@@ -1,6 +1,9 @@
 package com.accounting_of_costumes.entities.Location.model;
 
+import com.accounting_of_costumes.entities.Exception.NoValidIdException;
+import com.accounting_of_costumes.entities.Exception.NullValueParamException;
 import com.accounting_of_costumes.entities.Item.model.Item;
+import com.accounting_of_costumes.entities.Location.exception.NoValidRouteException;
 import com.accounting_of_costumes.entities.Place.model.Place;
 
 import java.util.HashSet;
@@ -23,6 +26,8 @@ public class Location {
     }
 
     public void setId(Long id) {
+        if(id<0)
+            throw new NoValidIdException(id);
         this.id = id;
     }
 
@@ -31,6 +36,8 @@ public class Location {
     }
 
     public void setRoute(String route) {
+        if(route==null || route.isEmpty())
+            throw new NoValidRouteException();
         this.route = route;
     }
 
@@ -39,11 +46,9 @@ public class Location {
     }
 
     public void setPlace(Place place) {
-        if(!this.place.equals(place)){
-            this.place.deleteLocation(this);
-            place.addLocation(this);
-            this.place=place;
-        }
+        if(place == null)
+            throw new NullValueParamException("place");
+        this.place=place;
 
     }
 
@@ -51,14 +56,12 @@ public class Location {
         return items;
     }
 
-    public void addItem(Item item){
-        if(this.items.add(item)){
-            item.setLocation(this);
-        }
+    public void setItems(Set<Item> items) {
+        if(items == null)
+            throw new NullValueParamException("items");
+        this.items = items;
     }
-    public void deleteItem(Item item){
-        this.items.remove(item);
-    }
+
 
     @Override
     public final boolean equals(Object o) {
