@@ -19,12 +19,12 @@ public class GetLocationByPlaceUserCase {
         this.placeGateway = placeGateway;
     }
 
-    public List<Location> execute(IPlacePublicData data){
-        if(data.id()==null)
+    public List<Location> execute(Long placeId){
+        if(placeId==null)
             throw new ParamValueException("Param 'place' cant be null!");
 
-        Place place = this.placeGateway.findById(data.id())
-                .orElseThrow(()-> new PlaceNotFoundException(data.id()));
+        Place place = this.placeGateway.findById(placeId)
+                .orElseThrow(()-> new PlaceNotFoundException(placeId));
 
         return this.locationGateway.findByPlace(place);
     }

@@ -13,7 +13,7 @@ public class CreateTagUserCase {
     }
 
     public Tag execute(IAddTagData tagData){
-        if(tagData.name() == null || tagData.name().isBlank())
+        if(tagData.name() == null || tagData.name().isEmpty())
             throw new ParamValueException("Empty tag name!");
 
         Tag tag = new Tag(tagData.name());

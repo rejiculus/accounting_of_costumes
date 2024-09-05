@@ -65,8 +65,8 @@ public class UpdateItemUserCase {
         item.setWriteOffDate(data.writeOffDate());
         item.setLocation(location);
         item.setItemState(state);
-        item.addAllImages(images);
-        item.addAllTags(tags);
+        item.setImages(images);
+        item.setTags(tags);
 
         return this.itemGateway.update(item);
     }
