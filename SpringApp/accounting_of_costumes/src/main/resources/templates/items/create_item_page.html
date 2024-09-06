@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Новый костюм</title>
+</head>
+<body>
+<div class="main-area">
+    <h1 class="main-area-title">Костюмы</h1>
+
+
+    <form action="#" th:attr="action=@{/items}" method="post" th:object="${item}">
+        <label>Название</label>
+        <input type="text" th:field="*{name}" /> <br>
+
+        <label>Артикль</label>
+        <input type="text" th:field="*{article}" /> <br>
+
+        <label>Количество</label>
+        <input type="text" th:field="*{count}" /> <br>
+
+        <label>Дата регистрации</label>
+        <input type="date" th:field="*{registrationDate}" /> <br>
+
+        <label>Дата снятия с учета</label>
+        <input type="date" th:field="*{writeOffDate}" /> <br>
+
+        <label>Место расположения</label>
+        <select name="location" id="location" th:field="*{locationId}">
+            <option th:each="location: ${locations}" th:value="${location.id}" th:text="${location.route}"></option>
+        </select>
+        <br>
+        <label>Состояние</label>
+        <select name="state" id="state" th:field="*{itemStateName}">
+            <option th:each="state: ${states}" th:value="${state.name}" th:text="${state.name}"></option>
+        </select>
+        <br>
+
+        <button type="submit" class="save">Сохранить</button>
+    </form>
+
+</div>
+
+</body>
+</html>

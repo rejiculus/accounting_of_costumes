@@ -1,13 +1,13 @@
 package com.accounting_of_costumes.api.Place.Controller;
 
 import com.accounting_of_costumes.api.Place.DTO.CreatePlaceData;
+import com.accounting_of_costumes.entities.Place.model.Place;
 import com.accounting_of_costumes.usercases.Place.CreatePlaceUserCase;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class CreatePlaceController {
     private CreatePlaceUserCase userCase;
 
@@ -15,8 +15,18 @@ public class CreatePlaceController {
         this.userCase = userCase;
     }
 
-    @PutMapping("/place/")
-    public String createPlace(@RequestBody CreatePlaceData data){
-        return this.userCase.execute(data).toString();
+    @PutMapping({"/places","/places/"})
+    public String createPlace(@ModelAttribute CreatePlaceData data){
+        Place place = this.userCase.execute(data);
+        return "redirect:/places/"+place.getId();
+    }
+
+    @GetMapping("/places/create")
+    public String getCreatePlacePage(Model model){
+        model.addAttribute("place", new CreatePlaceData(""))
+                .addAttribute("allPlaces","/places")
+                .addAttribute("homepage", "/items");
+        return "places/place_create";
+
     }
 }

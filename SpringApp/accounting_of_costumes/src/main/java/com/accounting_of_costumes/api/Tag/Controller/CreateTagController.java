@@ -1,14 +1,14 @@
 package com.accounting_of_costumes.api.Tag.Controller;
 
+import com.accounting_of_costumes.api.Tag.DTO.CreateTagDTO;
 import com.accounting_of_costumes.api.Tag.DTO.CreateTagData;
 import com.accounting_of_costumes.entities.Tag.model.Tag;
 import com.accounting_of_costumes.usercases.Tag.CreateTagUserCase;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class CreateTagController {
     private final CreateTagUserCase userCase;
 
@@ -16,9 +16,16 @@ public class CreateTagController {
         this.userCase = createTagUserCase;
     }
 
-    @PutMapping("/tag/")
-    public String createTag(@RequestBody CreateTagData data){
-        Tag tag = userCase.execute(data);
-        return tag.toString();
+    @PostMapping("/tags")
+    public String createTag(@ModelAttribute CreateTagDTO data){
+        Tag tag = userCase.execute(new CreateTagData(data.getName()));//fixme change interface
+        return "redirect:/tags/"+tag.getName();
+    }
+
+    @GetMapping("/tags/create")
+    public String getCreationPage(Model model){
+        model.addAttribute("tag", new CreateTagDTO())
+                .addAttribute("allTagsPage", "/tags");
+        return "tags/create_tag";
     }
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все места</title>
+</head>
+<body>
+<div>
+    <table>
+
+        <tr th:each="place: ${places}">
+            <td th:text="*{place.name}">Название</td>
+            <td><a th:href="${tag.path}">Подробнее</a></td>
+
+
+        </tr>
+
+    </table>
+</div>
+
+</body>
+<footer>
+    <a th:href="${createTagPage}">Создать новый</a>
+    <a th:href="${allItemsPage}">Главная</a>
+</footer>
+</html>

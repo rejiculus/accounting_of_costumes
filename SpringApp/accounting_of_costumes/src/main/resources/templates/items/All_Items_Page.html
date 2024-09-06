@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Костюмы</title>
+</head>
+<body>
+<div class="main-area">
+    <h1 class="main-area-title">Костюмы</h1>
+    <button class="search">Поиск</button>
+    <button class="add">Добавить новый</button>
+
+    <table class="items">
+        <tr class="item-title">
+            <td class="item-title-name">Название</td>
+            <td class="item-title-article">Артикль</td>
+            <td class="item-title-count">Количество</td>
+            <td class="item-title-about"> </td>
+        </tr>
+        <tr class="item-back" th:each="item: ${items}">
+            <td class="item-name" th:text="${item.name}"></td>
+            <td class="item-article" th:text="${item.article}"></td>
+            <td class="item-count" th:text="${item.count}"></td>
+            <td class="item-count" th:text="${item.id}"></td>
+            <td class="item-about"> <a class="item-about-button" th:href="@{/items(id=*{item.id})}">Подробнее</a> </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+<footer>
+    <a th:href="${allTagsPage}">Все теги</a>
+    <a th:href="${allLocationsPage}">Все локации</a>
+    <a th:href="${allPlacesPage}">Все места</a>
+    <a th:href="${allStatesPage}">Все состояния</a>
+    <a th:href="${allImagesPage}">Все изображения</a>
+</footer>
+</html>

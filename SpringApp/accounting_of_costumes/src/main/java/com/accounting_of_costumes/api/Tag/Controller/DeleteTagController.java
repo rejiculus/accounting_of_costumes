@@ -3,15 +3,14 @@ package com.accounting_of_costumes.api.Tag.Controller;
 import com.accounting_of_costumes.entities.Tag.exception.TagNotFoundException;
 import com.accounting_of_costumes.usercases.Tag.DeleteTagUserCase;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 
-@RestController
+@Controller
 public class DeleteTagController {
     private DeleteTagUserCase userCase;
 
@@ -19,10 +18,13 @@ public class DeleteTagController {
         this.userCase = deleteTagUserCase;
     }
 
-    @DeleteMapping("/tag/{name}")
+    @PostMapping("/tags/{name}/delete")
     @ResponseStatus(HttpStatus.OK)
-    public String deleteTag(@PathVariable String name) throws TagNotFoundException {
+    public String deleteTag(@PathVariable String name, Model model) throws TagNotFoundException {
         this.userCase.execute(name);
-        return String.format("Tag %s deleted!", name);
+        model.addAttribute("name", name)
+                .addAttribute("allTagsPage", "/tags")
+                .addAttribute("allItemsPage", "/items");
+        return "tags/tag_delete";
     }
 }

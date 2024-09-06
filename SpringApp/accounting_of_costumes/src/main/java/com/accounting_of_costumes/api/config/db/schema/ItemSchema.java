@@ -74,6 +74,10 @@ public class ItemSchema {
         this.location = new LocationSchema(item.getLocation());
         this.state = new ItemStateSchema(item.getItemState());
 
+        this.images = item.getImages().stream()
+                .map(ImageSchema::new)
+                .collect(Collectors.toSet());
+
         this.tags = item.getTags().stream()
                 .map(x->new TagSchema(x.getName()))
                 .collect(Collectors.toSet());
@@ -86,10 +90,10 @@ public class ItemSchema {
         item.setRegistrationDate(this.registrationDate);
         item.setWriteOffDate(this.writeOffDate);
         item.setLocation(this.location.toLocation());
-        item.addAllImages(this.images.stream()
+        item.setImages(this.images.stream()
                 .map(ImageSchema::toImage)
                 .collect(Collectors.toSet()));
-        item.addAllTags(this.tags.stream()
+        item.setTags(this.tags.stream()
                 .map(TagSchema::toTag)
                 .collect(Collectors.toSet()));
 

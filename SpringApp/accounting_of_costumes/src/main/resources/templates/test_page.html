@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 th:text="${some}"></h1>
+<form action="#" th:action="@{/test}" method="post" th:object="${item}">
+    <label>ID</label>
+    <input type="text" th:field="*{id}">
+    <br>
+    <label>Name</label>
+    <input type="text" th:field="*{name}">
+    <br>
+
+    <button type="submit">Save</button>
+</form>
+<table>
+    <tr th:each="i :${items}">
+        <td th:text="*{i.id}"></td>
+        <td th:text="*{i.name}"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Тег</title>
+</head>
+<body>
+<h2>Тег</h2>
+<div>
+    <table>
+
+        <tr>
+            <td>Название</td>
+        </tr>
+        <tr>
+            <td th:text="${name}"></td>
+        </tr>
+        <tbody>
+            <tr th:each="item: ${items}">
+                <td th:text="*{item.name}"></td>
+                <td th:href="*{item.path}">Подробнее</td>
+            </tr>
+        </tbody>
+
+    </table>
+    <form th:action="@{/tags/{name}/delete(name=${name})}" th:method="post">
+
+        <button type="submit">Удалить!</button>
+    </form>
+</div>
+
+</body>
+<footer>
+    <a th:href="${allTagsPage}">Все теги</a>
+    <a th:href="${allItemsPage}">Главная</a>
+</footer>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание тега</title>
+</head>
+<body>
+<h2>Создание тега</h2>
+<div>
+    <form th:action="${allTagsPage}" th:object="${tag}" th:method="post">
+        <div>
+            <label>Название:&nbsp;</label>
+            <input type="text" th:field="*{name}"></input>
+        </div>
+        <div>
+            <button type="submit">Сохранить</button>
+        </div>
+    </form>
+</div>
+
+</body>
+<footer>
+    <a th:href="${allTagsPage}">Список тегов</a>
+</footer>
+</html>
